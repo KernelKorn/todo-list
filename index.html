@@ -12,20 +12,30 @@
         #sortable li {padding: 0.4em; padding-left: 1.5em;  }
         #sortable li span { position: absolute; margin-left: -1.3em; }
     </style>
-    <script>
-        jQuery(function() {
-            jQuery( "#sortable" ).sortable();
-            jQuery( "#sortable" ).disableSelection();
-        });
-    </script>
 </head>
 <body>
 
 <ul id="sortable">
-    <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span><input id="task1" size="60" type="text"></li>
 </ul>
+
 <button id="addTask" type="button">+</button>
 <button id="save" type="button">Save</button>
 
 </body>
 </html>
+
+<script>
+    jQuery(function() {
+        jQuery( "#sortable" ).sortable();
+        if(localStorage.getItem("sorted") !== null) {
+            var sortedValues = localStorage.getItem('sorted').substring(7).split("&task[]=");
+            var ul = jQuery("#sortable");
+            var items = jQuery("#sortable").children();
+            for (var i = sortedValues.length - 1; i >= 0; i--) {
+                // index is zero-based to you have to remove one from the values in your array
+                ul.prepend( items.get((sortedValues[i] - 1)));
+            }
+        }
+        jQuery( "#sortable" ).disableSelection();
+    });
+</script>
