@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="js/prototype.js"></script>
+    <script src="js/todo.js"></script>
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script>jQuery.noConflict();</script>
+    <style>
+        #sortable { list-style-type: none; margin: 0; padding: 0; width: 550px; }
+        #sortable li {padding: 0.4em; padding-left: 1.5em;  }
+        #sortable li span { position: absolute; margin-left: -1.3em; }
+    </style>
+    <script>
+        jQuery(function() {
+            jQuery( "#sortable" ).sortable();
+            jQuery( "#sortable" ).disableSelection();
+        });
+    </script>
+</head>
+<body>
+
+<ul id="sortable">
+    <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span><input id="task1" size="60" type="text"></li>
+</ul>
+<button id="addTask" type="button">+</button>
+<button id="save" type="button">Save</button>
+
+</body>
+</html>
