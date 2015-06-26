@@ -9,7 +9,7 @@ document.observe("dom:loaded", function() {
         numTask = parseInt(localStorage.getItem('numTask'));
         for (var i = 1; i <= numTask; i++){
             toDo.insertLi(i);
-            $('input_' + i).setValue(localStorage.getItem('task_'+ i));
+            $('input_' + i).setValue(localStorage.getItem( localStorage.key( i + 1 )));
         }
     }
 
@@ -18,10 +18,10 @@ document.observe("dom:loaded", function() {
     });
 
     $('save').observe('click', function(e) {
-        toDo.save();
+        toDo.saveTasks();
     });
 
-    $$('.deleteTask').invoke('observe', 'click', toDo.delete)
+    $$('.deleteTask').invoke('observe', 'click', toDo.deleteTask)
 });
 
 var ToDoList = Class.create();
@@ -33,19 +33,19 @@ ToDoList.prototype = {
         numTask + '" class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span><input id="input_' +
         numTask + '" size="60" type="text"><button class="deleteTask" type="button">x</button></li>')
     },
-    save: function(){
+    saveTasks: function(){
+
+        var sorted = jQuery( "#sortable" ).sortable( "serialize");
+        localStorage.setItem('sorted', sorted);
+
         localStorage.setItem('numTask', jQuery('li').length);
         var numTask = parseInt(localStorage.getItem('numTask'));
         for (var i = 1; i <= numTask; i++ ){
             localStorage.setItem('task_' + i, $('input_' + i).value );
         }
-
-        var sorted = jQuery( "#sortable" ).sortable( "serialize");
-        localStorage.setItem('sorted', sorted);
     },
-    delete: function(){
+    deleteTask: function(){
         var taskLi = this.up(0);
-        console.log(taskLi);
 
         localStorage.removeItem(taskLi.identify());
         taskLi.remove();

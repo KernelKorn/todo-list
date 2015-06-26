@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head lang="en">
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <script src="js/prototype.js"></script>
     <script src="js/todo.js"></script>
-    <script src="js/jquery-1.11.3.min.js"></script>
-    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <script>jQuery.noConflict();</script>
     <style>
         #sortable { list-style-type: none; margin: 0; padding: 0; width: 550px; }
@@ -32,7 +32,6 @@
             var ul = jQuery("#sortable");
             var items = jQuery("#sortable").children();
             for (var i = sortedValues.length - 1; i >= 0; i--) {
-                // index is zero-based to you have to remove one from the values in your array
                 ul.prepend( items.get((sortedValues[i] - 1)));
             }
         }
