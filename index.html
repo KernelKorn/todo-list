@@ -33,12 +33,12 @@
         jQuery( "#sortable" ).sortable({
             update: function(e, ui) {
                 var sorted = jQuery("#sortable").sortable("serialize");
-                localStorage.setItem('sorted', sorted);
+                localStorage.setItem('z_sorted', sorted);
             }
         });
         // sets the order of the task
-        if(localStorage.getItem("sorted") !== null) {
-            var sortedValues = localStorage.getItem('sorted').substring(7).split("&task[]=");
+        if(localStorage.getItem("z_sorted") !== null) {
+            var sortedValues = localStorage.getItem('z_sorted').substring(7).split("&task[]=");
             var ul = jQuery("#sortable");
             var items = jQuery("#sortable").children();
             for (var i = sortedValues.length - 1; i >= 0; i--) {

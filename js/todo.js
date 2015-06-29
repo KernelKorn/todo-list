@@ -16,7 +16,7 @@ document.observe("dom:loaded", function() {
 
         for (var i = 1; i <= numTask; i++){
             toDo.insertLi(i);
-            var taskObject = JSON.parse(localStorage.getItem( localStorage.key( i + 1 )));
+            var taskObject = JSON.parse(localStorage.getItem( localStorage.key( i )));
             $('input_' + i).setValue( taskObject['taskValue']);
             $('div_' + i).update( taskObject['taskValue'].strike());
 
@@ -61,8 +61,15 @@ document.observe("dom:loaded", function() {
         }
     });
 
-    $$('.deleteTaskBtn').invoke('observe', 'click', toDo.deleteTask);
-    $$('.finishTaskBtn').invoke('observe', 'click', toDo.finishTask);
+    jQuery('#sortable').on('click','.finishTaskBtn',function(e) {
+        toDo.finishTask(this);
+    });
+
+    jQuery('#sortable').on('click','.deleteTaskBtn',function(e) {
+        toDo.deleteTask(this);
+    });
+    //$$('.deleteTaskBtn').invoke('observe', 'click', toDo.deleteTask);
+    //$$('.finishTaskBtn').invoke('on', 'click','.finishTaskBtn', toDo.finishTask);
 });
 
 var ToDoList = Class.create();
@@ -92,15 +99,15 @@ ToDoList.prototype = {
         }
         console.log('saved');
     },
-    deleteTask: function(){
-        var taskLi = this.up(0);
+    deleteTask: function(child){
+        var taskLi = child.up(0);
 
         localStorage.removeItem(taskLi.identify());
         taskLi.remove();
         localStorage.setItem('numTask', jQuery('li').length);
     },
-    finishTask: function(){
-        var taskID = this.up(0).identify().replace('task_','');
+    finishTask: function(child){
+        var taskID = child.up(0).identify().replace('task_','');
         var taskObject = JSON.parse(localStorage.getItem('task_' + taskID));
 
         if(taskObject['isCompleted'] === "true"){
@@ -108,12 +115,14 @@ ToDoList.prototype = {
             $('div_' + taskID).hide();
             taskObject = { 'taskValue' :  $('input_' + taskID).value, 'isCompleted' : 'false' };
             localStorage.setItem('task_' + taskID, JSON.stringify(taskObject) );
+            $('div_' + taskID).update(taskObject['taskValue'].strike());
 
         } else {
             $('input_' + taskID).hide()
             $('div_' + taskID).show();
             taskObject = { 'taskValue' :  $('input_' + taskID).value, 'isCompleted' : 'true' };
             localStorage.setItem('task_' + taskID, JSON.stringify(taskObject) );
+            $('div_' + taskID).update(taskObject['taskValue'].strike());
         }
     }
 };
