@@ -30,6 +30,7 @@
 
 <script>
     jQuery(function() {
+        // save order of task after each reorder
         jQuery( "#sortable" ).sortable({
             update: function(e, ui) {
                 var sorted = jQuery("#sortable").sortable("serialize");
