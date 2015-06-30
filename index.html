@@ -2,6 +2,7 @@
 <html>
 <head lang="en">
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
     <script src="js/prototype.js"></script>
     <script src="js/todo.js"></script>
     <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
@@ -15,10 +16,11 @@
 </head>
     <body>
     <h2 id="todoTitle">Click to add Title</h2>
+    <div id="editTitle">
+        <input id="inputTitle">
+        <button id="saveTitleBtn" type="button">Save Title</button></li>
+    </div>
     <button id="addTask" type="button">Add Task</button>
-
-    <input id="inputTitle">
-    <button id="saveTitleBtn" type="button">Save Title</button></li>
 
     <ul id="sortable">
     </ul>

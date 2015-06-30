@@ -79,8 +79,8 @@ ToDoList.prototype = {
     insertLi: function(numTask) {
         // inserts list item
         $('sortable').insert('<li  id="task_'+
-        numTask + '" class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span><input id="input_' +
-        numTask + '" size="45" type="text"><div id="div_' + numTask +'" ></div><button class="finishTaskBtn" type="button">&#10003</button>' +
+        numTask + '" class="ui-state-default tasks"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span><input id="input_' +
+        numTask + '" size="45" type="text"><div class="taskComplete" id="div_' + numTask +'" ></div><button class="finishTaskBtn" type="button">&#10003</button>' +
         '<button class="deleteTaskBtn" type="button">&#10005</button></li>')
     },
     saveTasks: function(){

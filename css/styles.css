@@ -1,0 +1,46 @@
+html, body {
+    height: 50%;
+}
+
+html {
+    display: table;
+    margin: auto;
+}
+
+body {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 0;
+}
+
+#addTask {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+#inputTitle{
+    margin-left: 35%;
+
+}
+
+#editTitle{
+    display: -webkit-flex; /* Safari */
+    -webkit-align-items: center; /* Safari 7.0+ */
+    display: flex;
+    align-items: center;
+}
+
+.tasks{
+    display: -webkit-flex;
+    -webkit-align-items: center;
+    display: flex;
+    align-items: center;
+}
+
+.taskComplete {
+    /*margin-right: 21em;*/
+}
