@@ -52,21 +52,21 @@ document.observe("dom:loaded", function() {
 
         localStorage.setItem('title', titleValue);
     });
-
+    // obsever to add new task
     $('addTask').observe('click', function(e) {
        toDo.insertLi(numTask+=1);
     });
-
+    // checks to see if enter key is pressed then saves the tasks
     jQuery('#sortable').on('keyup','input', function(e) {
         if (event.keyCode == 13) {
             toDo.saveTasks();
         }
     });
-
+    // checks to see if finishTaskBtn is pressed then passes that element
     jQuery('#sortable').on('click','.finishTaskBtn',function(e) {
         toDo.finishTask(this);
     });
-
+    // checks to see if deleteTaskBtn is pressed then passes that element
     jQuery('#sortable').on('click','.deleteTaskBtn',function(e) {
         toDo.deleteTask(this);
     });
@@ -98,7 +98,14 @@ ToDoList.prototype = {
             }
             localStorage.setItem('task_' + i, JSON.stringify(taskObject) );
         }
+        this.saveOrder();
         console.log('saved');
+
+        jQuery('body').prepend('<div id="flash" style="display:none"></div>');
+        jQuery('#flash').html("Saved");
+        //jQuery('#flash').toggleClass('cssClassHere');
+        jQuery('#flash').slideDown('slow').fadeOut(1000);
+        //jQuery('#flash').click(function () { $('#flash').toggle('highlight') });
     },
     deleteTask: function(child){
         var taskLi = child.up(0);
@@ -107,8 +114,7 @@ ToDoList.prototype = {
         taskLi.remove();
         localStorage.setItem('numTask', jQuery('li').length);
 
-        var sorted = jQuery("#sortable").sortable("serialize");
-        localStorage.setItem('z_sorted', sorted);
+        this.saveOrder();
     },
     finishTask: function(child){
         var taskID = child.up(0).identify().replace('task_','');
@@ -128,5 +134,9 @@ ToDoList.prototype = {
             localStorage.setItem('task_' + taskID, JSON.stringify(taskObject) );
             $('div_' + taskID).update(taskObject['taskValue'].strike());
         }
+    },
+    saveOrder: function() {
+        var sorted = jQuery("#sortable").sortable("serialize");
+        localStorage.setItem('z_sorted', sorted);
     }
 };
