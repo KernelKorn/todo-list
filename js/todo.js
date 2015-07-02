@@ -67,7 +67,6 @@ var toDoListManager = Class.create({
             }
             jQuery( "#sortable" ).disableSelection();
             $('inputTitle').hide();
-            $('saveTitleBtn').hide();
         });
     },
     saveTasks: function(){
@@ -125,7 +124,7 @@ var toDoListManager = Class.create({
 var ToDoList = Class.create( toDoListManager,{
     setupHtml: function() {
         var self = this;
-        
+
         $(self.titleElementId).update(self.toDoObject.title);
 
         self.toDoObject.toDoList.each(function (task, index) {
