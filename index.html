@@ -16,41 +16,16 @@
 </head>
 <header></header>
 <body>
-    <h2 id="todoTitle">Click to add Title</h2>
-    <div id="editTitle">
-        <input id="inputTitle">
-        <button id="saveTitleBtn" type="button">Save Title</button></li>
+    <div id="toDoList">
+        <h2 id="toDoTitle">Click to add Title</h2>
+        <div id="editTitle">
+            <input id="inputTitle">
+            <button id="saveTitleBtn" type="button">Save Title</button></li>
+        </div>
+        <button id="addTask" type="button">Add Task</button>
+
+        <ul id="sortable">
+        </ul>
     </div>
-    <button id="addTask" type="button">Add Task</button>
-
-    <ul id="sortable">
-    </ul>
-
-
-
 </body>
 </html>
-
-<script>
-    jQuery(function() {
-        // save order of task after each reorder
-        jQuery( "#sortable" ).sortable({
-            update: function(e, ui) {
-                var sorted = jQuery("#sortable").sortable("serialize");
-                localStorage.setItem('z_sorted', sorted);
-            }
-        });
-        // sets the order of the task
-        if(localStorage.getItem("z_sorted") !== null) {
-            var sortedValues = localStorage.getItem('z_sorted').substring(7).split("&task[]=");
-            var ul = jQuery("#sortable");
-            var items = jQuery("#sortable").children();
-            for (var i = sortedValues.length - 1; i >= 0; i--) {
-                ul.prepend( items.get((sortedValues[i] - 1)));
-            }
-        }
-        jQuery( "#sortable" ).disableSelection();
-        $('inputTitle').hide();
-        $('saveTitleBtn').hide();
-    });
-</script>
